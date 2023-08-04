@@ -14,12 +14,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { FundosComponent } from './fundos/fundos.component';
 import { MovimentosComponent } from './movimentos/movimentos.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-
 
 
 @NgModule({
@@ -28,8 +24,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-  
-    FundosComponent,
   ],
   imports: [
     BrowserModule,
