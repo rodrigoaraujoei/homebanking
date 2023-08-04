@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'homebanking';
+  title = 'demoApp';
+  email:string;
+  password:string;
+  remail:string;
+  rpassword:string;
+  rcpassword:string;
+
+ 
+  constructor(private snackBar:MatSnackBar){
+
+  }
+  register() {
+
+  }
+  login() {
+    if(this.email=="admin" && this.password=="admin"){
+        this.snackBar.open('Login Successful','',{duration:1000})
+    }else{
+      this.snackBar.open('Login error','',{duration:1000})
+    }
+  }
+  
 }
