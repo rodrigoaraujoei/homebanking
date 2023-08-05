@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MovimentosComponent } from './movimentos/movimentos.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     FormsModule,
     MatSnackBarModule,
     MatFormFieldModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

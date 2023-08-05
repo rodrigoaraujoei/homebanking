@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Isto vai ser 1 problema",
+      "email": "rodrigoaraujoei@gmail.com",
+      "saldo": 0,
+      "password": "1"
+    },
+    {
+      "id": 2,
+      "name": "teste",
+      "email": "teste1",
+      "saldo": 0,
+      "password": "1"
+    },
+    {
+      "id": 3,
+      "name": "1",
+      "email": "1",
+      "saldo": 0,
+      "password": "1"
+    },
+    {
+      "id": 4,
+      "name": "2",
+      "email": "2",
+      "saldo": 0,
+      "password": "2"
+    },
+    {
+      "id": 5,
+      "name": "5",
+      "email": "5",
+      "saldo": 0,
+      "password": "5"
+    },
+    {
+      "id": 6,
+      "name": "6",
+      "email": "6",
+      "saldo": 0,
+      "password": "6"
+    }
+  ]
+}

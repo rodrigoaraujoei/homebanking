@@ -15,19 +15,4 @@ export class AppComponent {
   rpassword:string;
   rcpassword:string;
 
- 
-  constructor(private snackBar:MatSnackBar){
-
-  }
-  register() {
-
-  }
-  login() {
-    if(this.email=="admin" && this.password=="admin"){
-        this.snackBar.open('Login Successful','',{duration:1000})
-    }else{
-      this.snackBar.open('Login error','',{duration:1000})
-    }
-  }
-  
 }
