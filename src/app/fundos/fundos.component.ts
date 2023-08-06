@@ -28,19 +28,18 @@ export class FundosComponent implements OnInit {
 
   adicionarFundos() {
     if (this.valorAdicionar > 0) {
-      this.fundosService.adicionarFundos(this.id, this.saldoAtual + this.valorAdicionar).subscribe(() => {
+      this.fundosService.adicionarFundos(this.id, this.saldoAtual + this.valorAdicionar).subscribe();
         this.saldoAtual += this.valorAdicionar;
         this.valorAdicionar = 0; // Limpar o campo após a adição
-      });
     }
   }
 
   retirarFundos() {
     if (this.valorRetirar > 0) {
-      this.fundosService.retirarFundos(this.id, this.saldoAtual - this.valorRetirar).subscribe(() => {
+      this.fundosService.retirarFundos(this.id, this.saldoAtual - this.valorRetirar).subscribe();
         this.saldoAtual -= this.valorRetirar;
         this.valorRetirar = 0; // Limpar o campo após a retirada
-      });
+      
     }
   }
 }
