@@ -1,22 +1,44 @@
-import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {ThemePalette} from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-/**
- * @title Input with error messages
- */
+import { Component, OnInit } from '@angular/core';
+import { FundosService } from '../services/fundos.service';
+
 @Component({
   selector: 'app-fundos',
   templateUrl: './fundos.component.html',
-  styleUrls: ['./fundos.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatSelectModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, NgIf],
+  styleUrls: ['./fundos.component.css']
 })
-export class FundosComponent {
-  colorControl = new FormControl('primary' as ThemePalette);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+export class FundosComponent implements OnInit {
+  id: number; // Defina o ID do usuário logado
+  saldoAtual: number;
+  valorAdicionar: number;
+  valorRetirar: number;
+
+  constructor(private fundosService: FundosService) { }
+
+  ngOnInit() {
+    
+    console.log('id:', this.id);
+
+    // Obter o saldo atual do usuário a partir do backend e exibi-lo na tela
+    this.fundosService.getUser(this.id).subscribe((user: any) => {
+      this.saldoAtual = user.saldo;
+    });
+  }
+
+  adicionarFundos() {
+    if (this.valorAdicionar > 0) {
+      this.fundosService.adicionarFundos(this.id, this.valorAdicionar).subscribe(() => {
+        this.saldoAtual += this.valorAdicionar;
+        this.valorAdicionar = 0; // Limpar o campo após a adição
+      });
+    }
+  }
+
+  retirarFundos() {
+    if (this.valorRetirar > 0) {
+      this.fundosService.retirarFundos(this.id, this.valorRetirar).subscribe(() => {
+        this.saldoAtual -= this.valorRetirar;
+        this.valorRetirar = 0; // Limpar o campo após a retirada
+      });
+    }
+  }
 }
