@@ -26,8 +26,8 @@ export class LoginComponent {
 
       // Loop through the response array to find the user
       if (user) {
-        sessionStorage.setItem('id', ''+(user.id-1)); //
-        this.router.navigate(['/fundos']); //{queryParams: {user: user.id-1}}
+        sessionStorage.setItem('id', ''+(user.id)); //
+        this.router.navigate(['/home']); //{queryParams: {user: user.id-1}}
       } 
       else{
       // If no user is found

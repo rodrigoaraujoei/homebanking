@@ -12,7 +12,9 @@ export class FundosComponent implements OnInit {
   valorAdicionar: number;
   valorRetirar: number;
 
-  constructor(private fundosService: FundosService) { }
+  constructor(private fundosService: FundosService) {
+    this.id = Number(sessionStorage.getItem("id"));
+   }
 
   ngOnInit() {
     
