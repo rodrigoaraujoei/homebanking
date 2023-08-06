@@ -20,6 +20,6 @@ export class FundosService {
   }
 
   retirarFundos(id: number, valor: number) {
-    return this.http.patch(`${this.baseUrl}/users/${id}`, { saldo: -valor });
+    return this.http.patch(`${this.baseUrl}/users/${id}`, { saldo: valor });
   }
 }
