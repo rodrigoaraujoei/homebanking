@@ -27,9 +27,10 @@ export class HomeComponent implements OnInit {
     */
     this.userData=sessionStorage.getItem('id');
     this.http.get(url).subscribe((resp: any) => {
-      this.userName = resp[this.userData].name;
-      this.userEmail = resp[this.userData].email;
-      this.userSaldo = resp[this.userData].saldo;
+      const user=resp.find((u:any)=>u.id==this.userData);
+      this.userName = user.name;
+      this.userEmail = user.email;
+      this.userSaldo = user.saldo;
     });
   }
 }
