@@ -5,13 +5,15 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+
 export interface UserData {
   id: string;
   name: string;
   progress: string;
   fruit: string;
 }
-
 /** Constants used to fill up our data base. */
 const FRUITS: string[] = [
   'blueberry',
@@ -45,8 +47,6 @@ const NAMES: string[] = [
   'Elizabeth',
 ];
 
-
-
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -57,14 +57,21 @@ const NAMES: string[] = [
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
+
 export class MovimentosComponent implements AfterViewInit {
+  rowName: string = '';
+  rowQuantia: number = 0;
+  rowPara: string = '';
+  rowData: string = '';
+  userData:any;
+
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor() {
+  
+  constructor(private http: HttpClient) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
@@ -72,9 +79,34 @@ export class MovimentosComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource(users);
   }
 
+  id:number;
+
+  ngOnInit(): void {
+
+    const url = 'http://localhost:3000/movimentos'; 
+    
+    this.userData=sessionStorage.getItem('id');
+    
+    this.http.get(url).subscribe((resp: any) => {
+      
+      const user=resp.filter((u:any)=>u.userid==this.userData);
+
+      console.log("filter",user);
+
+      this.rowName = user.userid;
+      this.rowQuantia = user.transferencia;
+      this.rowPara = user.userid;
+      this.rowData = user.data;
+
+    });
+
+  }
+
   ngAfterViewInit() {
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(event: Event) {

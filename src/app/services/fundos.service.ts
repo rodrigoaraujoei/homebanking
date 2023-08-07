@@ -15,11 +15,19 @@ export class FundosService {
     return this.http.get(`${this.baseUrl}/users/${id}`);
   }
 
-  adicionarFundos(id: number, valor: number) {
-    return this.http.patch(`${this.baseUrl}/users/${id}`, { saldo: valor });
-  }
+  
 
-  retirarFundos(id: number, valor: number) {
-    return this.http.patch(`${this.baseUrl}/users/${id}`, { saldo: valor });
+  transferencia(id: number, valor: number,saldo: number) {
+    const movimento = {
+      userid: id,
+      data: new Date(),
+      transferencia: valor,
+      saldodepois: saldo+valor,
+    };
+    this.http.patch(`${this.baseUrl}/users/${id}`, { saldo: valor+saldo }).subscribe();
+    this.http.post(`${this.baseUrl}/movimentos/`, movimento).subscribe((response: any) => {
+      console.log(movimento);
+    });
+
   }
 }

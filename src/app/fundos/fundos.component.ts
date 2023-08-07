@@ -17,7 +17,7 @@ export class FundosComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+
     console.log('id:', this.id);
 
     // Obter o saldo atual do usuário a partir do backend e exibi-lo na tela
@@ -28,18 +28,19 @@ export class FundosComponent implements OnInit {
 
   adicionarFundos() {
     if (this.valorAdicionar > 0) {
-      this.fundosService.adicionarFundos(this.id, this.saldoAtual + this.valorAdicionar).subscribe();
+      this.fundosService.transferencia(this.id, this.valorAdicionar, this.saldoAtual);
         this.saldoAtual += this.valorAdicionar;
         this.valorAdicionar = 0; // Limpar o campo após a adição
+
     }
   }
 
   retirarFundos() {
     if (this.valorRetirar > 0) {
-      this.fundosService.retirarFundos(this.id, this.saldoAtual - this.valorRetirar).subscribe();
+      this.fundosService.transferencia(this.id, -this.valorRetirar, this.saldoAtual);
         this.saldoAtual -= this.valorRetirar;
         this.valorRetirar = 0; // Limpar o campo após a retirada
-      
+
     }
   }
 }
