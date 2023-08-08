@@ -4,9 +4,7 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 
 export interface UserData {
   id: string;
@@ -14,6 +12,7 @@ export interface UserData {
   progress: string;
   fruit: string;
 }
+
 /** Constants used to fill up our data base. */
 const FRUITS: string[] = [
   'blueberry',
@@ -47,6 +46,8 @@ const NAMES: string[] = [
   'Elizabeth',
 ];
 
+
+
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -57,59 +58,42 @@ const NAMES: string[] = [
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
-
 export class MovimentosComponent implements AfterViewInit {
-  rowName: string = '';
-  rowQuantia: number = 0;
-  rowPara: string = '';
-  rowData: string = '';
-  userData:any;
-
+  id: any;
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   dataSource: MatTableDataSource<UserData>;
-
+  user:any;
+  newdata: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
   constructor(private http: HttpClient) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
   }
 
-  id:number;
-
   ngOnInit(): void {
+    const url = 'http://localhost:3000/movimentos'; // Update the URL
 
-    const url = 'http://localhost:3000/movimentos'; 
-    
-    this.userData=sessionStorage.getItem('id');
-    
+
+    this.id = sessionStorage.getItem('id');
     this.http.get(url).subscribe((resp: any) => {
+      this.user=resp.filter((u: any)=>u.userid==this.id);
+      console.log(this.user)
+      this.newdata = new MatTableDataSource(this.user);
       
-      const user=resp.filter((u:any)=>u.userid==this.userData);
-
-      console.log("filter",user);
-
-      this.rowName = user.userid;
-      this.rowQuantia = user.transferencia;
-      this.rowPara = user.userid;
-      this.rowData = user.data;
-
     });
-
   }
 
   ngAfterViewInit() {
-
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 
   applyFilter(event: Event) {
+
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
