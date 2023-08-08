@@ -47,7 +47,6 @@ const NAMES: string[] = [
 ];
 
 
-
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -58,6 +57,7 @@ const NAMES: string[] = [
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
+
 export class MovimentosComponent implements AfterViewInit {
   id: any;
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
@@ -83,7 +83,7 @@ export class MovimentosComponent implements AfterViewInit {
       this.user=resp.filter((u: any)=>u.userid==this.id);
       console.log(this.user)
       this.newdata = new MatTableDataSource(this.user);
-      
+
     });
   }
 
