@@ -18,7 +18,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   login() {
-    const url = 'http://localhost:3000/users'; // Update the URL
+    const url = 'http://localhost:3000/users'; 
 
 
     this.http.get(url).subscribe((resp: any) => {
@@ -26,8 +26,8 @@ export class LoginComponent {
 
       // Loop through the response array to find the user
       if (user) {
-        sessionStorage.setItem('id', ''+(user.id)); //
-        this.router.navigate(['/home']); //{queryParams: {user: user.id-1}}
+        sessionStorage.setItem('id', ''+(user.id)); 
+        this.router.navigate(['/home']); 
       } 
       else{
       // If no user is found
@@ -38,27 +38,38 @@ export class LoginComponent {
   
   register() {
 
-    const url = 'http://localhost:3000/users'; // Update the URL
+    const url = 'http://localhost:3000/users'; 
 
     if(this.registerName===''){
+
       console.log("Name is blank");
+
     }
+
     else if(this.registerPassword1==this.registerPassword2){
+
       this.http.get(url).subscribe((resp: any) => {
+
         const user = resp.find((u: any) => u.email === this.registerEmail);
+
         if(user){
+
           console.log("Mail already created");
           return;
+
         }
+
         else{
+
           const newUser = {
+
             id: resp.length+1,
             name: this.registerName,
             email: this.registerEmail,
             saldo: 0,
             password: this.registerPassword1
-          };
 
+          };
 
           // Send a POST request to add the new user
           this.http.post(url, newUser).subscribe((response: any) => {
@@ -71,10 +82,17 @@ export class LoginComponent {
           this.registerPassword2 = '';
           
         }
+
       });
+
     }
+
     else{
+
       console.log("Passwords are not the same:");
+
     }
+
   }
+
 }

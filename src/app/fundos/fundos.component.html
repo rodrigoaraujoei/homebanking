@@ -1,24 +1,21 @@
-
-
 <!-- Navbar -->
 <div class="navbar">
-    <a class="link" href="/home">Home</a>
-    <a class="link" href="/fundos">Fundos</a>
-    <a class="link" href="/movimentos">Movimentos</a>
+  <a class="link" href="/home">Home</a>
+  <a class="link" href="/fundos">Fundos</a>
+  <a class="link" href="/movimentos">Movimentos</a>
 </div>
   
 <!-- Fundos Content -->
-
 <br>
 
 <div>
-    <h1>Saldo Atual: {{ saldoAtual }}</h1>
-    <form (ngSubmit)="adicionarFundos()">
-      <input type="number" name="valorAdicionar" [(ngModel)]="valorAdicionar" placeholder="Valor a Adicionar">
-      <button type="submit">Adicionar Fundos</button>
-    </form>
-    <form (ngSubmit)="retirarFundos()">
-      <input type="number" name="valorRetirar" [(ngModel)]="valorRetirar" placeholder="Valor a Retirar">
-      <button type="submit">Retirar Fundos</button>
-    </form>
-  </div>
+  <h1>Saldo Atual: {{ saldoAtual }}</h1>
+  <form (ngSubmit)="adicionarFundos()">
+    <input type="number" name="valorAdicionar" [(ngModel)]="valorAdicionar" placeholder="Valor a Adicionar">
+    <button type="submit">Adicionar Fundos</button>
+  </form>
+  <form (ngSubmit)="retirarFundos()">
+    <input type="number" name="valorRetirar" [(ngModel)]="valorRetirar" placeholder="Valor a Retirar">
+    <button type="submit">Retirar Fundos</button>
+  </form>
+</div>

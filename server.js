@@ -2,7 +2,9 @@
 
 const Hapi = require('@hapi/hapi');
 const Inert = require('@hapi/inert');
+const hapiAuthJwt2 = require('hapi-auth-jwt2');
 const Path = require('path');
+//const JWT = require('jsonwebtoken');
 
 const init = async () => {
 
@@ -11,21 +13,24 @@ const init = async () => {
         host: 'localhost'
     });
 
+
+    server.register(hapiAuthJwt2);
+    
     await server.register(Inert);
 
     server.route({
 
         method: 'GET',
 
-        path: '/home{param*}',
+        path: '',
 
         handler: {
 
           directory: {
 
-            path: Path.join(__dirname, './src/app/home'),
-                redirectToSlash: true,
-                index: ['home-component.html']
+            path: Path.join(__dirname, './src/app/login'),
+            redirectToSlash: true,
+            index: true
 
           },
 

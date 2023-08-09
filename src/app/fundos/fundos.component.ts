@@ -8,6 +8,7 @@ import { FundosService } from '../services/fundos.service';
 })
 export class FundosComponent implements OnInit {
   id: number; // Defina o ID do usuário logado
+  
   saldoAtual: number;
   valorAdicionar: number;
   valorRetirar: number;
