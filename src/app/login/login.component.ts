@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
   loginEmail: string = '';
   loginPassword: string = '';
@@ -18,6 +19,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   login() {
+
     const url = 'http://localhost:3000/users'; 
 
 
@@ -30,10 +32,13 @@ export class LoginComponent {
         this.router.navigate(['/home']); 
       } 
       else{
-      // If no user is found
+        
       console.log("User not found with email:", this.loginEmail);
+
     }
+
     });
+
   }
   
   register() {
@@ -94,5 +99,5 @@ export class LoginComponent {
     }
 
   }
-
+  
 }

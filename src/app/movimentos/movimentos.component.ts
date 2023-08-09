@@ -75,10 +75,11 @@ export class MovimentosComponent implements AfterViewInit {
   }
 
   ngOnInit(): void {
-    const url = 'http://localhost:3000/movimentos'; // Update the URL
+    const url = 'http://localhost:3000/movimentos'; 
 
 
     this.id = sessionStorage.getItem('id');
+    
     this.http.get(url).subscribe((resp: any) => {
       this.user=resp.filter((u: any)=>u.userid==this.id);
       console.log(this.user)

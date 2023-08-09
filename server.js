@@ -22,7 +22,7 @@ const init = async () => {
 
         method: 'GET',
 
-        path: '',
+        path: '/{param*}',
 
         handler: {
 
@@ -30,7 +30,7 @@ const init = async () => {
 
             path: Path.join(__dirname, './src/app/login'),
             redirectToSlash: true,
-            index: true
+            index: ['home.component.html']
 
           },
 
