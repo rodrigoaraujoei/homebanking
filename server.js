@@ -13,29 +13,30 @@ const init = async () => {
 
     await server.register(Inert);
 
-    server.route(
-        
-        {
-            method: 'GET',
-            path: '/',
-            handler: (request, h) => {
+    server.route({
 
-                return h.file('./src/app/home/{param*}');
-            },
-        
+        method: 'GET',
+
+        path: '/home{param*}',
+
+        handler: {
+
+          directory: {
+
+            path: Path.join(__dirname, './src/app/home'),
+                redirectToSlash: true,
+                index: ['home-component.html']
+
+          },
+
         },
-        {
-            method: 'GET',
-            path: '/users',
-            handler: (request, h) => {
 
-                return 'Hello Users!';
-            }
-        }
-        
-    );
+      });
+
+     
 
     await server.start();
+
     console.log('Server running on %s', server.info.uri);
 
 };
